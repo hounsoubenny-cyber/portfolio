@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samuel Hounsou — AI & Cybersecurity Engineer</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <div class="bg-orbs">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+
+  <!-- TOGGLE LANG + THEME -->
+  <div class="toggle-container glass">
+    <button class="toggle-btn" id="btnEN" data-lang="en">EN</button>
+    <button class="toggle-btn" id="btnFR" data-lang="fr">FR</button>
+    <button class="toggle-btn" id="btnTheme">🌙</button>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="glass nav">
+    <button class="nav-link" data-section="hero">Home</button>
+    <button class="nav-link" data-section="skills">Skills</button>
+    <button class="nav-link" data-section="services">Services</button>
+    <button class="nav-link" data-section="projects">Projects</button>
+    <button class="nav-link" data-section="contact">Contact</button>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-content reveal">
+        <div class="terminal-line">
+          <span class="terminal-prompt">&gt;</span>
+          <span class="terminal-text" data-en="ai_engineer.py --mode=active" data-fr="ingenieur_ia.py --mode=actif">ai_engineer.py --mode=active</span>
+        </div>
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span class="badge-text" data-en="Open to work" data-fr="Disponible">Open to work</span>
+        </div>
+        <h1 class="hero-name">Samuel<br/>Hounsou</h1>
+        <p class="hero-title" data-en="AI Engineer · Cybersecurity Developer · Fullstack" data-fr="Ingénieur IA · Développeur Cybersécurité · Fullstack">AI Engineer · Cybersecurity Developer · Fullstack</p>
+        <p class="hero-desc" data-en="17 y/o builder from <em>Cotonou, Bénin</em>. I build real systems — not tutorials." data-fr="Builder de 17 ans basé à <em>Cotonou, Bénin</em>. Je construis de vrais systèmes — pas des tutoriels.">
+          17 y/o builder from <em>Cotonou, Bénin</em>. I build real systems — not tutorials.
+        </p>
+        <div class="hero-ctas">
+          <button class="btn-primary" data-section="projects">View Projects</button>
+          <button class="btn-secondary" data-section="contact">Hire Me</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">5+</div>
+            <div class="stat-label" data-en="Projects Shipped" data-fr="Projets Livrés">Projects Shipped</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">99.3%</div>
+            <div class="stat-label" data-en="Best Accuracy" data-fr="Meilleure Précision">Best Accuracy</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">34K+</div>
+            <div class="stat-label" data-en="Lines of Code" data-fr="Lignes de Code">Lines of Code</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AVATAR AVEC FLIP -->
+      <div class="hero-visual reveal" id="avatarCard">
+        <div class="avatar-wrap">
+          <div class="avatar-ring"></div>
+          <div class="avatar-ring2"></div>
+          <div class="avatar-inner">
+            <div class="avatar-front">
+              <span class="avatar-initials">SH</span>
+            </div>
+            <div class="avatar-back">
+              <img src="images/photo.jpg" alt="Samuel Hounsou" id="avatarImg" />
+            </div>
+            <div class="avatar-glow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-wrap">
+      <div class="reveal">
+        <div class="section-label" data-en="Expertise" data-fr="Expertise">Expertise</div>
+        <h2 class="section-title" data-en="Skills &amp; <span>Technologies</span>" data-fr="Compétences &amp; <span>Technologies</span>">Skills &amp; <span>Technologies</span></h2>
+      </div>
+      <div class="skills-grid">
+        <!-- Languages Card -->
+        <div class="skill-card glass reveal">
+          <div class="skill-cat-icon">⌨️</div>
+          <div class="skill-cat" data-en="Languages" data-fr="Langages">Languages</div>
+          <div class="skill-langs">
+            <div class="skill-lang"><span class="lang-name">Python</span><div class="lang-bar"><div class="lang-fill" style="width: 95%"></div></div><span class="lang-level">Expert</span></div>
+            <div class="skill-lang"><span class="lang-name">JavaScript</span><div class="lang-bar"><div class="lang-fill" style="width: 75%"></div></div><span class="lang-level">Advanced</span></div>
+            <div class="skill-lang"><span class="lang-name">React / JSX</span><div class="lang-bar"><div class="lang-fill" style="width: 75%"></div></div><span class="lang-level">Advanced</span></div>
+            <div class="skill-lang"><span class="lang-name">HTML / CSS</span><div class="lang-bar"><div class="lang-fill" style="width: 78%"></div></div><span class="lang-level">Advanced</span></div>
+            <div class="skill-lang"><span class="lang-name">Cython</span><div class="lang-bar"><div class="lang-fill" style="width: 70%"></div></div><span class="lang-level">Advanced</span></div>
+            <div class="skill-lang"><span class="lang-name">C</span><div class="lang-bar"><div class="lang-fill" style="width: 45%"></div></div><span class="lang-level">Intermediate</span></div>
+          </div>
+        </div>
+
+        <!-- AI/ML Card -->
+        <div class="skill-card glass reveal">
+          <div class="skill-cat-icon">🧠</div>
+          <div class="skill-cat">AI / ML / DL</div>
+          <div class="skill-tags">
+            <span class="skill-tag">PyTorch</span>
+            <span class="skill-tag">TensorFlow</span>
+            <span class="skill-tag">scikit-learn</span>
+            <span class="skill-tag">CNN</span>
+            <span class="skill-tag">RNN</span>
+            <span class="skill-tag">LSTM</span>
+            <span class="skill-tag">Transformer</span>
+            <span class="skill-tag">LLM</span>
+            <span class="skill-tag">NLP</span>
+            <span class="skill-tag">HuggingFace</span>
+            <span class="skill-tag">ONNX</span>
+            <span class="skill-tag">TorchScript</span>
+          </div>
+        </div>
+
+        <!-- Cybersecurity Card -->
+        <div class="skill-card glass reveal">
+          <div class="skill-cat-icon">🔐</div>
+          <div class="skill-cat" data-en="Cybersecurity" data-fr="Cybersécurité">Cybersecurity</div>
+          <div class="skill-tags">
+            <span class="skill-tag">IDS / IPS</span>
+            <span class="skill-tag">Vulnerability Detection</span>
+            <span class="skill-tag">Anti-phishing</span>
+            <span class="skill-tag">Fuzzing</span>
+            <span class="skill-tag">Suricata</span>
+            <span class="skill-tag">pcap</span>
+            <span class="skill-tag">socket</span>
+            <span class="skill-tag">dpkt</span>
+          </div>
+        </div>
+
+        <!-- Fullstack Card -->
+        <div class="skill-card glass reveal">
+          <div class="skill-cat-icon">⚡</div>
+          <div class="skill-cat">Fullstack</div>
+          <div class="skill-tags">
+            <span class="skill-tag">FastAPI</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">FAISS</span>
+            <span class="skill-tag">SQLModel</span>
+            <span class="skill-tag">REST API</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-wrap">
+      <div class="reveal">
+        <div class="section-label" data-en="What I Do" data-fr="Ce que je fais">What I Do</div>
+        <h2 class="section-title" data-en="My <span>Services</span>" data-fr="Mes <span>Offres</span>">My <span>Services</span></h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-card glass reveal">
+          <div class="service-icon">🌐</div>
+          <div class="service-cat" data-en="Web Development" data-fr="Développement Web">Web Development</div>
+          <ul class="service-items">
+            <li data-en="Frontend only (React)" data-fr="Frontend seul (React)">Frontend only (React)</li>
+            <li data-en="Backend only (FastAPI)" data-fr="Backend seul (FastAPI)">Backend only (FastAPI)</li>
+            <li data-en="Fullstack complete" data-fr="Fullstack complet">Fullstack complete</li>
+          </ul>
+        </div>
+        <div class="service-card glass reveal">
+          <div class="service-icon">🛡️</div>
+          <div class="service-cat" data-en="Security" data-fr="Sécurité">Security</div>
+          <ul class="service-items">
+            <li data-en="Website hardening" data-fr="Sécurisation de site web">Website hardening</li>
+            <li data-en="IDS, IPS, anti-phishing, vulnerability scanner" data-fr="Systèmes de sécurité robustes">IDS, IPS, anti-phishing, vulnerability scanner</li>
+          </ul>
+        </div>
+        <div class="service-card glass reveal">
+          <div class="service-icon">🤖</div>
+          <div class="service-cat">Intelligence Artificielle</div>
+          <ul class="service-items">
+            <li data-en="AI integration into apps" data-fr="Intégration IA dans une application">AI integration into apps</li>
+            <li data-en="Custom AI agent creation" data-fr="Création d'agent IA personnalisé">Custom AI agent creation</li>
+            <li data-en="Custom ML / DL model" data-fr="Modèle ML/DL sur mesure">Custom ML / DL model</li>
+            <li data-en="NLP / LLM fine-tuning" data-fr="Fine-tuning NLP/LLM">NLP / LLM fine-tuning</li>
+          </ul>
+        </div>
+        <div class="service-card glass reveal">
+          <div class="service-icon">⚙️</div>
+          <div class="service-cat" data-en="Automation" data-fr="Automatisation">Automation</div>
+          <ul class="service-items">
+            <li data-en="Data pipelines" data-fr="Pipelines de données">Data pipelines</li>
+            <li data-en="Python automation" data-fr="Automatisation Python">Python automation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-wrap">
+      <div class="reveal">
+        <div class="section-label" data-en="Portfolio" data-fr="Portfolio">Portfolio</div>
+        <h2 class="section-title" data-en="Featured <span>Projects</span>" data-fr="Mes <span>Projets</span>">Featured <span>Projects</span></h2>
+      </div>
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card glass reveal">
+          <div class="project-header">
+            <div class="project-icon">🔍</div>
+            <a href="https://github.com/hounsoubenny-cyber/anti-phishing-ml" target="_blank" class="project-link">↗</a>
+          </div>
+          <div class="project-name">Anti-Phishing ML</div>
+          <div class="project-badges">
+            <span class="badge badge-green">99.3% Accuracy</span>
+            <span class="badge badge-gold">F1 = 0.99</span>
+          </div>
+          <p class="project-desc">URL phishing detector trained on 247K URLs. Stacking ensemble with Bayesian optimization.</p>
+          <div class="project-stack">
+            <span class="stack-tag">Python</span> · <span class="stack-tag">XGBoost</span> · <span class="stack-tag">scikit-learn</span> · <span class="stack-tag">Optuna</span>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card glass reveal">
+          <div class="project-header">
+            <div class="project-icon">🛡️</div>
+            <a href="https://github.com/hounsoubenny-cyber/ids-ai" target="_blank" class="project-link">↗</a>
+          </div>
+          <div class="project-name">IDS / IPS AI System</div>
+          <div class="project-badges">
+            <span class="badge badge-green">&lt;100ms latency</span>
+            <span class="badge badge-blue">Real-time</span>
+          </div>
+          <p class="project-desc">Hybrid network intrusion detection combining LSTM autoencoders, CNN, Isolation Forest.</p>
+          <div class="project-stack">
+            <span class="stack-tag">TensorFlow</span> · <span class="stack-tag">PyTorch</span> · <span class="stack-tag">pcap</span> · <span class="stack-tag">Suricata</span>
+          </div>
+        </div>
+
+        <!-- Project 3 - Featured -->
+        <div class="project-card featured glass reveal">
+          <div class="project-header">
+            <div class="project-icon">📡</div>
+            <a href="https://github.com/hounsoubenny-cyber/nexus-four" target="_blank" class="project-link">↗</a>
+          </div>
+          <div class="project-name">NEXUS — Offline RAG Assistant</div>
+          <div class="project-badges">
+            <span class="badge badge-green">100% Offline</span>
+            <span class="badge badge-gold">Built in 24h</span>
+            <span class="badge badge-blue">Hackathon</span>
+          </div>
+          <p class="project-desc">Fully offline RAG assistant built in 24h. Three search modes, no internet required.</p>
+          <div class="project-stack">
+            <span class="stack-tag">FastAPI</span> · <span class="stack-tag">React</span> · <span class="stack-tag">FAISS</span> · <span class="stack-tag">Sentence-BERT</span> · <span class="stack-tag">Docker</span>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card glass reveal">
+          <div class="project-header">
+            <div class="project-icon">📄</div>
+            <a href="https://github.com/hounsoubenny-cyber/doc-classifier" target="_blank" class="project-link">↗</a>
+          </div>
+          <div class="project-name">DocClassifier AI</div>
+          <div class="project-badges">
+            <span class="badge badge-blue">Fullstack</span>
+            <span class="badge badge-gold">OCR + JWT</span>
+          </div>
+          <p class="project-desc">Full-stack document classifier with OCR. FastAPI + React, JWT auth, encryption.</p>
+          <div class="project-stack">
+            <span class="stack-tag">FastAPI</span> · <span class="stack-tag">React</span> · <span class="stack-tag">Docker</span> · <span class="stack-tag">SQLModel</span>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="project-card glass reveal">
+          <div class="project-header">
+            <div class="project-icon">🤖</div>
+            <a href="https://github.com/hounsoubenny-cyber/smart-predictor" target="_blank" class="project-link">↗</a>
+          </div>
+          <div class="project-name">SmartPredictor</div>
+          <div class="project-badges">
+            <span class="badge badge-gold">Auto-ML</span>
+            <span class="badge badge-blue">Library</span>
+          </div>
+          <p class="project-desc">Auto-ML library that auto-detects classification/regression from a single config.</p>
+          <div class="project-stack">
+            <span class="stack-tag">XGBoost</span> · <span class="stack-tag">CatBoost</span> · <span class="stack-tag">LightGBM</span> · <span class="stack-tag">Optuna</span>
+          </div>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="project-card glass reveal">
+          <div class="project-header">
+            <div class="project-icon">🧬</div>
+          </div>
+          <div class="project-name">ContextGuard</div>
+          <div class="project-badges">
+            <span class="badge badge-wip">In Progress</span>
+            <span class="badge badge-gold">NLP Security</span>
+          </div>
+          <p class="project-desc">LLM prompt injection detection system. Multilingual BERT + custom Transformer.</p>
+          <div class="project-stack">
+            <span class="stack-tag">PyTorch</span> · <span class="stack-tag">HuggingFace</span> · <span class="stack-tag">Transformer</span>
+          </div>
+        </div>
+
+        <!-- Project 7 -->
+        <div class="project-card glass reveal">
+          <div class="project-header">
+            <div class="project-icon">🏥</div>
+          </div>
+          <div class="project-name">Hospital Guardian</div>
+          <div class="project-badges">
+            <span class="badge badge-wip">In Progress</span>
+            <span class="badge badge-blue">Healthcare AI</span>
+          </div>
+          <p class="project-desc">AI-powered digital nervous system for hospitals. Digital Twin, predictive AI.</p>
+          <div class="project-stack">
+            <span class="stack-tag">FastAPI</span> · <span class="stack-tag">PyTorch</span> · <span class="stack-tag">Kafka</span> · <span class="stack-tag">TimescaleDB</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- GITHUB -->
+  <section id="github">
+    <div class="section-wrap">
+      <div class="reveal">
+        <div class="section-label">GitHub</div>
+        <h2 class="section-title" data-en="Open <span>Source</span>" data-fr="Open <span>Source</span>">Open <span>Source</span></h2>
+      </div>
+      <div class="github-wrap glass reveal">
+        <div class="gh-info">
+          <div class="gh-handle">@hounsoubenny-cyber</div>
+          <p class="gh-desc">All my projects are open source. Real systems, production-grade code — just shipping.</p>
+          <div class="gh-stats">
+            <div class="gh-stat"><div class="gh-stat-num">5+</div><div class="gh-stat-label" data-en="Public Repos" data-fr="Dépôts">Public Repos</div></div>
+            <div class="gh-stat"><div class="gh-stat-num">34K+</div><div class="gh-stat-label">Lines</div></div>
+            <div class="gh-stat"><div class="gh-stat-num">76+</div><div class="gh-stat-label" data-en="Python Files" data-fr="Fichiers Py">Python Files</div></div>
+          </div>
+          <a href="https://github.com/hounsoubenny-cyber" target="_blank" class="btn-primary" data-en="View GitHub Profile" data-fr="Voir le Profil GitHub">View GitHub Profile</a>
+        </div>
+        <div class="gh-img">
+          <img src="https://github-readme-stats.vercel.app/api?username=hounsoubenny-cyber&show_icons=true&theme=midnight-purple&hide_border=true&bg_color=0f0f0f&title_color=C9A84C&icon_color=C9A84C&text_color=A09890" alt="GitHub Stats" loading="lazy" />
+          <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=hounsoubenny-cyber&layout=compact&theme=midnight-purple&hide_border=true&bg_color=0f0f0f&title_color=C9A84C&text_color=A09890" alt="Top Languages" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-wrap">
+      <div class="contact-wrap">
+        <div class="reveal">
+          <div class="section-label" data-en="Let's Talk" data-fr="Parlons">Let's Talk</div>
+          <h2 class="contact-title" data-en="Ready to build<br/>something <span>great?</span>" data-fr="Prêt à construire<br/>quelque chose <span>de grand ?</span>">Ready to build<br/>something <span>great?</span></h2>
+          <p class="contact-sub" data-en="I'm available for freelance missions, collaborations, and open to internship opportunities." data-fr="Disponible pour des missions freelance, des collaborations, et ouvert aux opportunités de stage.">I'm available for freelance missions, collaborations, and open to internship opportunities.</p>
+          <div class="contact-links">
+            <a href="https://linkedin.com/in/benny-hounsou-00a267374" target="_blank" class="contact-link glass">
+              <div class="contact-link-icon">in</div>
+              <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-value">Samuel Hounsou</div></div>
+            </a>
+            <a href="https://github.com/hounsoubenny-cyber" target="_blank" class="contact-link glass">
+              <div class="contact-link-icon">GH</div>
+              <div><div class="contact-link-label">GitHub</div><div class="contact-link-value">hounsoubenny-cyber</div></div>
+            </a>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="contact-card glass">
+            <div class="contact-card-avatar">SH</div>
+            <div class="contact-card-name">Samuel Hounsou</div>
+            <div class="contact-card-role">AI & Cybersecurity Engineer</div>
+            <div class="contact-card-loc">📍 Cotonou, Bénin</div>
+            <div class="avail-badge"><span class="avail-dot"></span><span data-en="Available for work" data-fr="Disponible">Available for work</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-copy">© 2025 Samuel Hounsou — Built from scratch.</div>
+    <div class="footer-logo">SH</div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/main.js"></script>
+</body>
+</html>
