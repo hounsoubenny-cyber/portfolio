@@ -1,215 +1,134 @@
-// ============================================
-// 1. CURSOR PERSONNALISÉ
-// ============================================
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-let mouseX = 0, mouseY = 0;
-let ringX = 0, ringY = 0;
+// ─── CANVAS PARTICLES ───
+const canvas=document.getElementById('bgCanvas');
+const ctx=canvas.getContext('2d');
+let W,H,particles=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+resize();window.addEventListener('resize',resize);
 
-document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    if (cursor) {
-        cursor.style.left = mouseX - 4 + 'px';
-        cursor.style.top = mouseY - 4 + 'px';
+class Particle{
+    constructor(){this.reset()}
+    reset(){
+        this.x=Math.random()*W;
+        this.y=Math.random()*H;
+        this.vx=(Math.random()-0.5)*0.3;
+        this.vy=(Math.random()-0.5)*0.3;
+        this.r=Math.random()*1.5+0.3;
+        this.alpha=Math.random()*0.4+0.05;
+        this.color=Math.random()>0.6?'0,212,255':'123,47,255';
     }
-});
-
-function animateRing() {
-    ringX += (mouseX - ringX) * 0.12;
-    ringY += (mouseY - ringY) * 0.12;
-    if (ring) {
-        ring.style.left = ringX - 16 + 'px';
-        ring.style.top = ringY - 16 + 'px';
+    update(){
+        this.x+=this.vx;this.y+=this.vy;
+        if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset();
     }
-    requestAnimationFrame(animateRing);
-}
-animateRing();
-
-// Effet hover sur les éléments cliquables
-const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card');
-interactiveElements.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        if (cursor) cursor.style.transform = 'scale(2.5)';
-        if (ring) {
-            ring.style.transform = 'scale(1.5)';
-            ring.style.opacity = '0.3';
-        }
-    });
-    el.addEventListener('mouseleave', () => {
-        if (cursor) cursor.style.transform = 'scale(1)';
-        if (ring) {
-            ring.style.transform = 'scale(1)';
-            ring.style.opacity = '0.5';
-        }
-    });
-});
-
-// ============================================
-// 2. LANGUE (EN/FR)
-// ============================================
-let currentLang = localStorage.getItem('language') || 'en';
-
-function setLanguage(lang) {
-    currentLang = lang;
-    localStorage.setItem('language', lang);
-
-    // Mettre à jour les boutons actifs
-    document.getElementById('btnEN').classList.toggle('active', lang === 'en');
-    document.getElementById('btnFR').classList.toggle('active', lang === 'fr');
-
-    // Mettre à jour tous les éléments avec data-en / data-fr
-    document.querySelectorAll('[data-en], [data-fr]').forEach(el => {
-        const text = el.getAttribute(`data-${lang}`);
-        if (text) {
-            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                el.placeholder = text;
-            } else {
-                el.innerHTML = text;
-            }
-        }
-    });
+    draw(){
+        ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+        ctx.fillStyle=`rgba(${this.color},${this.alpha})`;ctx.fill();
+    }
 }
 
-// Écouteurs pour les boutons de langue
-document.getElementById('btnEN')?.addEventListener('click', () => setLanguage('en'));
-document.getElementById('btnFR')?.addEventListener('click', () => setLanguage('fr'));
+for(let i=0;i<120;i++)particles.push(new Particle());
 
-// Initialiser la langue
-setLanguage(currentLang);
-
-// ============================================
-// 3. THEME (DARK/LIGHT)
-// ============================================
-function setTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    const themeBtn = document.getElementById('btnTheme');
-    if (themeBtn) themeBtn.innerHTML = theme === 'dark' ? '🌙' : '☀️';
-}
-
-function toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-}
-
-// Charger le thème sauvegardé
-const savedTheme = localStorage.getItem('theme') || 'dark';
-setTheme(savedTheme);
-
-// Écouteur pour le bouton thème
-document.getElementById('btnTheme')?.addEventListener('click', toggleTheme);
-
-// ============================================
-// 4. AVATAR FLIP (clic pour montrer la photo)
-// ============================================
-const avatarCard = document.getElementById('avatarCard');
-let flipTimeout;
-
-if (avatarCard) {
-    avatarCard.addEventListener('click', () => {
-        avatarCard.classList.add('flipped');
-        clearTimeout(flipTimeout);
-        flipTimeout = setTimeout(() => {
-            avatarCard.classList.remove('flipped');
-        }, 3000);
-    });
-}
-
-// ============================================
-// 5. NAVIGATION SMOOTH SCROLL
-// ============================================
-const navLinks = document.querySelectorAll('.nav-link, .btn-primary, .btn-secondary');
-const sections = ['hero', 'skills', 'services', 'projects', 'contact'];
-
-navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        const sectionId = link.getAttribute('data-section');
-        if (sectionId && sections.includes(sectionId)) {
-            e.preventDefault();
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
-                // Mettre à jour la classe active sur la navigation
-                document.querySelectorAll('.nav-link').forEach(navLink => {
-                    navLink.classList.remove('active');
-                    if (navLink.getAttribute('data-section') === sectionId) {
-                        navLink.classList.add('active');
-                    }
-                });
-            }
-        }
-    });
-});
-
-// Mettre à jour la navigation active au scroll
-function updateActiveNav() {
-    const scrollPosition = window.scrollY + 100;
-
-    for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-            const offsetTop = element.offsetTop;
-            const offsetBottom = offsetTop + element.offsetHeight;
-
-            if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('data-section') === section) {
-                        link.classList.add('active');
-                    }
-                });
-                break;
+// connections
+function drawConnections(){
+    for(let i=0;i<particles.length;i++){
+        for(let j=i+1;j<particles.length;j++){
+            const dx=particles[i].x-particles[j].x;
+            const dy=particles[i].y-particles[j].y;
+            const d=Math.sqrt(dx*dx+dy*dy);
+            if(d<120){
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x,particles[i].y);
+                ctx.lineTo(particles[j].x,particles[j].y);
+                ctx.strokeStyle=`rgba(0,212,255,${0.04*(1-d/120)})`;
+                ctx.lineWidth=0.5;ctx.stroke();
             }
         }
     }
 }
 
-window.addEventListener('scroll', updateActiveNav);
-updateActiveNav();
+function loop(){
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(p=>{p.update();p.draw()});
+    drawConnections();
+    requestAnimationFrame(loop);
+}loop();
 
-// ============================================
-// 6. REVEAL ANIMATION (apparition au scroll)
-// ============================================
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            revealObserver.unobserve(entry.target);
-        }
+// ─── CURSOR ───
+const curDot=document.getElementById('curDot');
+const curRing=document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    curDot.style.left=mx+'px';curDot.style.top=my+'px';
+});
+(function animRing(){
+    rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;
+    curRing.style.left=rx+'px';curRing.style.top=ry+'px';
+    requestAnimationFrame(animRing);
+})();
+document.querySelectorAll('a,button,.skill-card,.proj-card,.service-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{
+        curDot.querySelector('.cur-dot').style.transform='translate(-50%,-50%) scale(2.5)';
+        curRing.querySelector('.cur-ring').style.transform='translate(-50%,-50%) scale(1.6)';
+        curRing.querySelector('.cur-ring').style.opacity='0.3';
     });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-// ============================================
-// 7. ANIMATION DES BARRES DE COMPÉTENCES
-// ============================================
-const skillObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const bars = entry.target.querySelectorAll('.lang-fill');
-            bars.forEach(bar => {
-                const width = bar.style.width;
-                bar.style.width = '0%';
-                setTimeout(() => { bar.style.width = width; }, 100);
-            });
-            skillObserver.unobserve(entry.target);
-        }
+    el.addEventListener('mouseleave',()=>{
+        curDot.querySelector('.cur-dot').style.transform='translate(-50%,-50%) scale(1)';
+        curRing.querySelector('.cur-ring').style.transform='translate(-50%,-50%) scale(1)';
+        curRing.querySelector('.cur-ring').style.opacity='1';
     });
-}, { threshold: 0.5 });
-
-document.querySelectorAll('.skill-card').forEach(card => skillObserver.observe(card));
-
-// ============================================
-// 8. PROTECTION DU LIEN DE CONTACT (anti-spam)
-// ============================================
-const emailLinks = document.querySelectorAll('.contact-link[href*="mailto"]');
-emailLinks.forEach(link => {
-    const email = link.getAttribute('href').replace('mailto:', '');
-    const encodedEmail = email.split('').reverse().join('');
-    link.setAttribute('href', `mailto:${encodedEmail.split('').reverse().join('')}`);
 });
 
-console.log('🚀 Portfolio chargé !');
+// ─── REVEAL ───
+const observer=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+        if(e.isIntersecting){
+            e.target.classList.add('visible');
+            // animate lang bars
+            e.target.querySelectorAll('.lang-fill').forEach(b=>b.classList.add('animate'));
+            observer.unobserve(e.target);
+        }
+    });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// ─── MOBILE MENU ───
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+hamburger.addEventListener('click',()=>{
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+});
+function closeMenu(){
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+}
+
+// ─── LANG ───
+function setLang(l){
+    document.getElementById('btnEN').classList.toggle('active',l==='en');
+    document.getElementById('btnFR').classList.toggle('active',l==='fr');
+    document.querySelectorAll('[data-en]').forEach(el=>{
+        const txt=el.getAttribute('data-'+l);
+        if(txt)el.innerHTML=txt;
+    });
+}
+
+// ─── NAV ACTIVE ───
+const sections=document.querySelectorAll('section[id]');
+const navLinks=document.querySelectorAll('.nav-link');
+window.addEventListener('scroll',()=>{
+    let current='';
+    sections.forEach(s=>{
+        if(window.scrollY>=s.offsetTop-100)current=s.id;
+    });
+        navLinks.forEach(l=>{
+            l.style.color=l.getAttribute('href')==='#'+current?'var(--cyan)':'';
+        });
+},{passive:true});
+
+// ─── FLIP AVATAR AUTOMATIQUE ───
+setInterval(function(){
+    const hex = document.querySelector('.avatar-hex');
+    if (hex) hex.classList.toggle('flipped');
+}, 4000);
