@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Samuel Hounsou — AI & Cybersecurity Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A84C;
+  --gold-light:#E8C96A;
+  --gold-dim:#8A6B2A;
+  --bg:#080808;
+  --bg2:#0f0f0f;
+  --bg3:#161616;
+  --surface:rgba(255,255,255,0.03);
+  --surface2:rgba(255,255,255,0.06);
+  --border:rgba(201,168,76,0.15);
+  --border2:rgba(201,168,76,0.3);
+  --text:#F0EDE6;
+  --text2:#A09890;
+  --text3:#5A5450;
+  --radius:12px;
+  --radius-lg:20px;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Syne',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* CURSOR */
+.cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transition:transform 0.1s;mix-blend-mode:difference}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transition:all 0.15s ease;opacity:0.5}
+
+/* NOISE */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:0.4;
+}
+
+/* ANIMATED BG */
+.bg-orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.12;animation:orbFloat 20s infinite ease-in-out}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,#C9A84C,transparent);top:-200px;right:-200px;animation-delay:0s}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,#8A6B2A,transparent);bottom:-100px;left:-100px;animation-delay:-7s}
+.orb3{width:300px;height:300px;background:radial-gradient(circle,#C9A84C,transparent);top:50%;left:50%;animation-delay:-14s;opacity:0.06}
+@keyframes orbFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(30px,-40px) scale(1.05)}
+  66%{transform:translate(-20px,20px) scale(0.95)}
+}
+
+/* LANG TOGGLE */
+.lang-toggle{
+  position:fixed;top:24px;right:24px;z-index:100;
+  display:flex;gap:4px;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(20px);
+  border:1px solid var(--border);
+  border-radius:100px;
+  padding:4px;
+}
+.lang-btn{
+  padding:6px 16px;border-radius:100px;border:none;
+  font-family:'Syne',sans-serif;font-size:12px;font-weight:600;
+  cursor:pointer;transition:all 0.3s;letter-spacing:0.05em;
+  background:transparent;color:var(--text2);
+}
+.lang-btn.active{background:var(--gold);color:#000}
+
+/* NAV */
+nav{
+  position:fixed;top:24px;left:50%;transform:translateX(-50%);
+  z-index:100;
+  display:flex;gap:0;
+  background:rgba(0,0,0,0.5);
+  backdrop-filter:blur(30px);
+  border:1px solid var(--border);
+  border-radius:100px;
+  padding:6px;
+}
+.nav-link{
+  padding:8px 20px;border-radius:100px;
+  font-size:13px;font-weight:500;letter-spacing:0.03em;
+  color:var(--text2);text-decoration:none;
+  transition:all 0.3s;white-space:nowrap;
+}
+.nav-link:hover{color:var(--gold);background:rgba(201,168,76,0.08)}
+
+/* SECTIONS */
+section{position:relative;z-index:1}
+
+/* HERO */
+#hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:120px 40px 80px;
+  max-width:1200px;margin:0 auto;
+}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,168,76,0.08);
+  border:1px solid var(--border2);
+  border-radius:100px;padding:6px 16px;
+  font-size:12px;font-weight:500;color:var(--gold);
+  letter-spacing:0.1em;text-transform:uppercase;
+  margin-bottom:24px;
+}
+.badge-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+.hero-name{
+  font-size:clamp(48px,6vw,80px);
+  font-weight:800;line-height:1;
+  letter-spacing:-0.02em;
+  background:linear-gradient(135deg,#F0EDE6 0%,var(--gold-light) 50%,var(--gold) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:16px;
+}
+.hero-title{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(18px,2.5vw,26px);
+  color:var(--text2);font-style:italic;
+  margin-bottom:24px;line-height:1.4;
+}
+.hero-desc{
+  font-size:15px;line-height:1.8;color:var(--text2);
+  max-width:480px;margin-bottom:40px;
+}
+.hero-desc em{color:var(--gold);font-style:normal}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--gold);color:#000;
+  padding:12px 28px;border-radius:100px;
+  font-weight:700;font-size:14px;text-decoration:none;
+  letter-spacing:0.03em;transition:all 0.3s;border:none;cursor:pointer;
+}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 12px 40px rgba(201,168,76,0.3)}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:var(--text);
+  padding:12px 28px;border-radius:100px;
+  font-weight:600;font-size:14px;text-decoration:none;
+  letter-spacing:0.03em;transition:all 0.3s;
+  border:1px solid var(--border2);
+}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+
+/* AVATAR */
+.hero-visual{display:flex;justify-content:center;align-items:center}
+.avatar-wrap{
+  position:relative;width:320px;height:320px;
+}
+.avatar-ring{
+  position:absolute;inset:-2px;border-radius:50%;
+  background:conic-gradient(var(--gold),transparent,var(--gold-dim),transparent,var(--gold));
+  animation:spin 8s linear infinite;
+}
+.avatar-ring2{
+  position:absolute;inset:-12px;border-radius:50%;
+  border:1px solid rgba(201,168,76,0.15);
+  animation:spin 15s linear infinite reverse;
+}
+.avatar-inner{
+  position:absolute;inset:2px;border-radius:50%;
+  background:var(--bg3);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.avatar-initials{
+  font-size:80px;font-weight:800;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:-2px;
+}
+.avatar-glow{
+  position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at center,rgba(201,168,76,0.15),transparent 70%);
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* STATS */
+.hero-stats{
+  display:flex;gap:32px;margin-top:40px;padding-top:40px;
+  border-top:1px solid var(--border);
+}
+.stat-item{}
+.stat-num{
+  font-size:28px;font-weight:800;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.stat-label{font-size:12px;color:var(--text3);letter-spacing:0.05em;text-transform:uppercase;margin-top:2px}
+
+/* SECTION TITLES */
+.section-wrap{padding:100px 40px;max-width:1200px;margin:0 auto}
+.section-label{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:16px;
+}
+.section-label::before{content:'';width:24px;height:1px;background:var(--gold)}
+.section-title{
+  font-size:clamp(32px,4vw,52px);font-weight:800;
+  letter-spacing:-0.02em;line-height:1.1;
+  margin-bottom:60px;
+}
+.section-title span{
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* DIVIDER */
+.divider{
+  width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border2),transparent);
+  margin:0 40px;
+}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.skill-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:28px;
+  backdrop-filter:blur(20px);
+  transition:all 0.4s;
+  position:relative;overflow:hidden;
+}
+.skill-card::before{
+  content:'';position:absolute;inset:0;border-radius:var(--radius-lg);
+  background:linear-gradient(135deg,rgba(201,168,76,0.05),transparent);
+  opacity:0;transition:opacity 0.4s;
+}
+.skill-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.skill-card:hover::before{opacity:1}
+.skill-cat-icon{font-size:24px;margin-bottom:16px}
+.skill-cat{
+  font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:16px;
+}
+.skill-tags{display:flex;flex-wrap:wrap;gap:8px}
+.skill-tag{
+  font-family:'DM Mono',monospace;
+  font-size:11px;padding:4px 10px;border-radius:6px;
+  background:rgba(201,168,76,0.08);
+  border:1px solid rgba(201,168,76,0.2);
+  color:var(--text2);
+  transition:all 0.2s;
+}
+.skill-card:hover .skill-tag{border-color:rgba(201,168,76,0.3);color:var(--text)}
+.skill-lang{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.lang-name{font-size:13px;font-weight:600;flex:1}
+.lang-level{font-size:11px;color:var(--gold);font-family:'DM Mono',monospace}
+.lang-bar{height:2px;background:var(--border);border-radius:2px;flex:1;position:relative;overflow:hidden}
+.lang-fill{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));border-radius:2px;transition:width 1.5s ease}
+
+/* OFFERS */
+.offers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.offer-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:28px;
+  transition:all 0.4s;
+  position:relative;overflow:hidden;cursor:default;
+}
+.offer-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  transform:scaleX(0);transition:transform 0.4s;
+}
+.offer-card:hover{border-color:var(--border2);transform:translateY(-4px)}
+.offer-card:hover::after{transform:scaleX(1)}
+.offer-icon{
+  width:44px;height:44px;border-radius:10px;
+  background:rgba(201,168,76,0.1);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;margin-bottom:20px;
+}
+.offer-cat{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.offer-items{list-style:none;display:flex;flex-direction:column;gap:8px}
+.offer-items li{
+  font-size:13px;color:var(--text2);
+  display:flex;align-items:flex-start;gap:8px;
+  line-height:1.4;
+}
+.offer-items li::before{content:'→';color:var(--gold-dim);flex-shrink:0;margin-top:1px}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px}
+.project-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:32px;
+  transition:all 0.4s;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.project-card.featured{
+  grid-column:span 2;
+  background:linear-gradient(135deg,rgba(201,168,76,0.06),var(--surface));
+  border-color:rgba(201,168,76,0.25);
+}
+.project-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 24px 80px rgba(0,0,0,0.6)}
+.project-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
+.project-icon{font-size:28px}
+.project-links{display:flex;gap:8px}
+.project-link{
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(255,255,255,0.05);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;color:var(--text2);font-size:14px;
+  transition:all 0.2s;
+}
+.project-link:hover{background:rgba(201,168,76,0.1);border-color:var(--border2);color:var(--gold)}
+.project-name{font-size:20px;font-weight:700;margin-bottom:8px;letter-spacing:-0.01em}
+.project-desc{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:20px;flex:1}
+.project-badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.badge{
+  font-family:'DM Mono',monospace;
+  font-size:10px;padding:3px 8px;border-radius:4px;
+  font-weight:500;
+}
+.badge-gold{background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.25);color:var(--gold-light)}
+.badge-green{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:#4ade80}
+.badge-blue{background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);color:#60a5fa}
+.badge-gray{background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text3)}
+.badge-wip{background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.2);color:#fb923c}
+.project-stack{display:flex;flex-wrap:wrap;gap:6px}
+.stack-tag{
+  font-family:'DM Mono',monospace;
+  font-size:10px;color:var(--text3);padding:2px 0;
+}
+
+/* GITHUB SECTION */
+.github-wrap{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:40px;
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;
+  align-items:center;
+}
+.gh-info{}
+.gh-handle{
+  font-family:'DM Mono',monospace;
+  font-size:22px;font-weight:500;color:var(--gold);
+  margin-bottom:8px;
+}
+.gh-desc{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:24px}
+.gh-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.gh-stat{
+  background:rgba(255,255,255,0.03);border:1px solid var(--border);
+  border-radius:10px;padding:16px;text-align:center;
+}
+.gh-stat-num{font-size:20px;font-weight:800;color:var(--gold)}
+.gh-stat-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-top:4px}
+.gh-img{border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;gap:12px}
+.gh-img img{width:100%;border-radius:var(--radius);opacity:0.9}
+
+/* CONTACT */
+.contact-wrap{
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+}
+.contact-text{}
+.contact-title{
+  font-size:clamp(28px,3.5vw,44px);font-weight:800;
+  letter-spacing:-0.02em;line-height:1.2;margin-bottom:16px;
+}
+.contact-sub{font-size:15px;color:var(--text2);line-height:1.7;margin-bottom:32px}
+.contact-links{display:flex;flex-direction:column;gap:12px}
+.contact-link{
+  display:flex;align-items:center;gap:16px;
+  padding:16px 20px;border-radius:var(--radius);
+  border:1px solid var(--border);background:var(--surface);
+  text-decoration:none;color:var(--text);
+  transition:all 0.3s;
+}
+.contact-link:hover{border-color:var(--border2);transform:translateX(4px);background:var(--surface2)}
+.contact-link-icon{
+  width:40px;height:40px;border-radius:8px;
+  background:rgba(201,168,76,0.1);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+  flex-shrink:0;
+}
+.contact-link-info{}
+.contact-link-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px}
+.contact-link-value{font-size:14px;font-weight:600;color:var(--gold)}
+.contact-card{
+  background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.02));
+  border:1px solid rgba(201,168,76,0.2);
+  border-radius:var(--radius-lg);
+  padding:40px;text-align:center;
+}
+.contact-card-avatar{
+  width:80px;height:80px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dim));
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;font-weight:800;color:#000;
+  margin:0 auto 20px;
+}
+.contact-card-name{font-size:22px;font-weight:700;margin-bottom:4px}
+.contact-card-role{font-size:13px;color:var(--gold);margin-bottom:8px;font-family:'DM Mono',monospace}
+.contact-card-loc{font-size:12px;color:var(--text3);margin-bottom:24px}
+.avail-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);
+  border-radius:100px;padding:8px 20px;font-size:12px;color:#4ade80;font-weight:600;
+}
+.avail-dot{width:6px;height:6px;background:#4ade80;border-radius:50%;animation:pulse 2s infinite}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--border);
+  padding:40px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;z-index:1;
+}
+.footer-copy{font-size:12px;color:var(--text3)}
+.footer-logo{
+  font-size:20px;font-weight:800;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease,transform 0.8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* GLASS */
+.glass{
+  backdrop-filter:blur(30px);
+  -webkit-backdrop-filter:blur(30px);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{display:none}
+  .hero-inner{grid-template-columns:1fr;gap:40px;text-align:center}
+  .hero-desc{max-width:100%}
+  .hero-ctas{justify-content:center}
+  .avatar-wrap{width:220px;height:220px}
+  .avatar-initials{font-size:54px}
+  .hero-stats{justify-content:center}
+  .project-card.featured{grid-column:span 1}
+  .github-wrap{grid-template-columns:1fr}
+  .contact-wrap{grid-template-columns:1fr}
+  .section-wrap{padding:60px 20px}
+  #hero{padding:100px 20px 60px}
+}
+@media(max-width:600px){
+  .projects-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr}
+  .offers-grid{grid-template-columns:1fr}
+}
+
+/* TERMINAL LINE */
+.terminal-line{
+  font-family:'DM Mono',monospace;
+  font-size:13px;color:var(--text3);
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:20px;
+}
+.terminal-line::before{content:'>';color:var(--gold)}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="bg-orbs">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+</div>
+
+<!-- LANG TOGGLE -->
+<div class="lang-toggle glass">
+  <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" id="btnFR" onclick="setLang('fr')">FR</button>
+</div>
+
+<!-- NAV -->
+<nav class="glass">
+  <a href="#hero" class="nav-link" data-en="Home" data-fr="Accueil">Home</a>
+  <a href="#skills" class="nav-link" data-en="Skills" data-fr="Compétences">Skills</a>
+  <a href="#offers" class="nav-link" data-en="Services" data-fr="Offres">Services</a>
+  <a href="#projects" class="nav-link" data-en="Projects" data-fr="Projets">Projects</a>
+  <a href="#contact" class="nav-link" data-en="Contact" data-fr="Contact">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-content reveal">
+      <div class="terminal-line" data-en="ai_engineer.py --mode=active" data-fr="ingenieur_ia.py --mode=actif">ai_engineer.py --mode=active</div>
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span data-en="Open to work" data-fr="Disponible">Open to work</span>
+      </div>
+      <h1 class="hero-name">Samuel<br/>Hounsou</h1>
+      <p class="hero-title" data-en="AI Engineer · Cybersecurity Developer · Fullstack" data-fr="Ingénieur IA · Développeur Cybersécurité · Fullstack">AI Engineer · Cybersecurity Developer · Fullstack</p>
+      <p class="hero-desc" data-en="17 y/o builder from <em>Cotonou, Bénin</em>. I build real systems — not tutorials. Phishing detector at <em>99.3% accuracy</em>, hybrid IDS at <em>&lt;100ms</em>, RAG in 24h. Every model, every pipeline, every line — from scratch." data-fr="Builder de 17 ans basé à <em>Cotonou, Bénin</em>. Je construis de vrais systèmes — pas des tutoriels. Détecteur de phishing à <em>99.3% de précision</em>, IDS hybride à <em>&lt;100ms</em>, RAG en 24h. Chaque modèle, chaque pipeline — from scratch.">17 y/o builder from <em>Cotonou, Bénin</em>. I build real systems — not tutorials. Phishing detector at <em>99.3% accuracy</em>, hybrid IDS at <em>&lt;100ms</em>, RAG in 24h. Every model, every pipeline, every line — from scratch.</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-primary" data-en="View Projects" data-fr="Voir les Projets">View Projects</a>
+        <a href="#contact" class="btn-secondary" data-en="Hire Me" data-fr="Me Contacter">Hire Me</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">5+</div>
+          <div class="stat-label" data-en="Projects Shipped" data-fr="Projets Livrés">Projects Shipped</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">99.3%</div>
+          <div class="stat-label" data-en="Best Accuracy" data-fr="Meilleure Précision">Best Accuracy</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">34K+</div>
+          <div class="stat-label" data-en="Lines of Code" data-fr="Lignes de Code">Lines of Code</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual reveal" style="transition-delay:0.2s">
+      <div class="avatar-wrap">
+        <div class="avatar-ring"></div>
+        <div class="avatar-ring2"></div>
+        <div class="avatar-inner">
+          <span class="avatar-initials">SH</span>
+          <div class="avatar-glow"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="section-label" data-en="Expertise" data-fr="Expertise">Expertise</div>
+      <h2 class="section-title" data-en="Skills &amp; <span>Technologies</span>" data-fr="Compétences &amp; <span>Technologies</span>">Skills &amp; <span>Technologies</span></h2>
+    </div>
+    <div class="skills-grid">
+      <!-- Languages -->
+      <div class="skill-card glass reveal">
+        <div class="skill-cat-icon">⌨</div>
+        <div class="skill-cat" data-en="Languages" data-fr="Langages">Languages</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="skill-lang">
+            <span class="lang-name">Python</span>
+            <div class="lang-bar"><div class="lang-fill" style="width:95%"></div></div>
+            <span class="lang-level">Expert</span>
+          </div>
+          <div class="skill-lang">
+            <span class="lang-name">JavaScript</span>
+            <div class="lang-bar"><div class="lang-fill" style="width:75%"></div></div>
+            <span class="lang-level">Advanced</span>
+          </div>
+          <div class="skill-lang">
+            <span class="lang-name">React / JSX</span>
+            <div class="lang-bar"><div class="lang-fill" style="width:75%"></div></div>
+            <span class="lang-level">Advanced</span>
+          </div>
+          <div class="skill-lang">
+            <span class="lang-name">HTML / CSS</span>
+            <div class="lang-bar"><div class="lang-fill" style="width:78%"></div></div>
+            <span class="lang-level">Advanced</span>
+          </div>
+          <div class="skill-lang">
+            <span class="lang-name">Cython</span>
+            <div class="lang-bar"><div class="lang-fill" style="width:70%"></div></div>
+            <span class="lang-level">Advanced</span>
+          </div>
+          <div class="skill-lang">
+            <span class="lang-name">C</span>
+            <div class="lang-bar"><div class="lang-fill" style="width:45%"></div></div>
+            <span class="lang-level">Intermediate</span>
+          </div>
+        </div>
+      </div>
+      <!-- AI/ML -->
+      <div class="skill-card glass reveal" style="transition-delay:0.1s">
+        <div class="skill-cat-icon">🧠</div>
+        <div class="skill-cat">AI / ML / DL</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">scikit-learn</span>
+          <span class="skill-tag">CNN</span>
+          <span class="skill-tag">RNN</span>
+          <span class="skill-tag">LSTM</span>
+          <span class="skill-tag">Transformer</span>
+          <span class="skill-tag">LLM</span>
+          <span class="skill-tag">NLP</span>
+          <span class="skill-tag">HuggingFace</span>
+          <span class="skill-tag">ONNX</span>
+          <span class="skill-tag">TorchScript</span>
+        </div>
+      </div>
+      <!-- Cybersecurity -->
+      <div class="skill-card glass reveal" style="transition-delay:0.2s">
+        <div class="skill-cat-icon">🔐</div>
+        <div class="skill-cat" data-en="Cybersecurity" data-fr="Cybersécurité">Cybersecurity</div>
+        <div class="skill-tags">
+          <span class="skill-tag">IDS / IPS</span>
+          <span class="skill-tag">Vulnerability Detection</span>
+          <span class="skill-tag">Anti-phishing</span>
+          <span class="skill-tag">Fuzzing</span>
+          <span class="skill-tag">Suricata</span>
+          <span class="skill-tag">pcap</span>
+          <span class="skill-tag">socket</span>
+          <span class="skill-tag">dpkt</span>
+        </div>
+      </div>
+      <!-- Fullstack -->
+      <div class="skill-card glass reveal" style="transition-delay:0.1s">
+        <div class="skill-cat-icon">⚡</div>
+        <div class="skill-cat">Fullstack</div>
+        <div class="skill-tags">
+          <span class="skill-tag">FastAPI</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">FAISS</span>
+          <span class="skill-tag">SQLModel</span>
+          <span class="skill-tag">REST API</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- OFFERS -->
+<section id="offers">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="section-label" data-en="What I Do" data-fr="Ce que je fais">What I Do</div>
+      <h2 class="section-title" data-en="My <span>Services</span>" data-fr="Mes <span>Offres</span>">My <span>Services</span></h2>
+    </div>
+    <div class="offers-grid">
+      <div class="offer-card glass reveal">
+        <div class="offer-icon">🌐</div>
+        <div class="offer-cat" data-en="Web Development" data-fr="Développement Web">Web Development</div>
+        <ul class="offer-items">
+          <li data-en="Frontend only (React)" data-fr="Frontend seul (React)">Frontend only (React)</li>
+          <li data-en="Backend only (FastAPI)" data-fr="Backend seul (FastAPI)">Backend only (FastAPI)</li>
+          <li data-en="Fullstack complete" data-fr="Fullstack complet">Fullstack complete</li>
+        </ul>
+      </div>
+      <div class="offer-card glass reveal" style="transition-delay:0.1s">
+        <div class="offer-icon">🛡</div>
+        <div class="offer-cat" data-en="Security" data-fr="Sécurité">Security</div>
+        <ul class="offer-items">
+          <li data-en="Website hardening" data-fr="Sécurisation de site web">Website hardening</li>
+          <li data-en="Robust security systems (IDS, IPS, anti-phishing, vulnerability scanner...)" data-fr="Systèmes de sécurité robustes (IDS, IPS, anti-phishing, scanner...)">Robust security systems (IDS, IPS, anti-phishing, vulnerability scanner...)</li>
+        </ul>
+      </div>
+      <div class="offer-card glass reveal" style="transition-delay:0.2s">
+        <div class="offer-icon">🤖</div>
+        <div class="offer-cat">Intelligence Artificielle</div>
+        <ul class="offer-items">
+          <li data-en="AI integration into apps" data-fr="Intégration IA dans une application">AI integration into apps</li>
+          <li data-en="Custom AI agent creation" data-fr="Création d'agent IA personnalisé">Custom AI agent creation</li>
+          <li data-en="Custom ML / DL model" data-fr="Modèle ML / DL sur mesure">Custom ML / DL model</li>
+          <li data-en="NLP / LLM fine-tuning" data-fr="Fine-tuning NLP / LLM">NLP / LLM fine-tuning</li>
+        </ul>
+      </div>
+      <div class="offer-card glass reveal" style="transition-delay:0.3s">
+        <div class="offer-icon">⚙</div>
+        <div class="offer-cat" data-en="Automation" data-fr="Automatisation">Automation</div>
+        <ul class="offer-items">
+          <li data-en="Data pipelines" data-fr="Pipelines de données">Data pipelines</li>
+          <li data-en="Python automation (scripts, workflows)" data-fr="Automatisation Python (scripts, workflows)">Python automation (scripts, workflows)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="section-label" data-en="Portfolio" data-fr="Portfolio">Portfolio</div>
+      <h2 class="section-title" data-en="Featured <span>Projects</span>" data-fr="Mes <span>Projets</span>">Featured <span>Projects</span></h2>
+    </div>
+    <div class="projects-grid">
+
+      <!-- Anti-phishing -->
+      <div class="project-card glass reveal">
+        <div class="project-header">
+          <div class="project-icon">🔍</div>
+          <div class="project-links">
+            <a href="https://github.com/hounsoubenny-cyber/anti-phishing-ml" target="_blank" class="project-link" title="GitHub">↗</a>
+          </div>
+        </div>
+        <div class="project-name">Anti-Phishing ML</div>
+        <div class="project-badges">
+          <span class="badge badge-green">99.3% Accuracy</span>
+          <span class="badge badge-gold">F1 = 0.99</span>
+        </div>
+        <p class="project-desc" data-en="URL phishing detector trained on 247K URLs. Stacking ensemble (XGBoost + HistGBT + RF) with Bayesian optimization and smart whitelist caching." data-fr="Détecteur de phishing entraîné sur 247K URLs. Ensemble stacking (XGBoost + HistGBT + RF) avec optimisation bayésienne et cache whitelist intelligent.">URL phishing detector trained on 247K URLs. Stacking ensemble (XGBoost + HistGBT + RF) with Bayesian optimization and smart whitelist caching.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>&nbsp;·&nbsp;<span class="stack-tag">XGBoost</span>&nbsp;·&nbsp;<span class="stack-tag">scikit-learn</span>&nbsp;·&nbsp;<span class="stack-tag">Optuna</span>
+        </div>
+      </div>
+
+      <!-- IDS -->
+      <div class="project-card glass reveal" style="transition-delay:0.1s">
+        <div class="project-header">
+          <div class="project-icon">🛡</div>
+          <div class="project-links">
+            <a href="https://github.com/hounsoubenny-cyber/ids-ai" target="_blank" class="project-link">↗</a>
+          </div>
+        </div>
+        <div class="project-name">IDS / IPS AI System</div>
+        <div class="project-badges">
+          <span class="badge badge-green">&lt;100ms latency</span>
+          <span class="badge badge-blue">Real-time</span>
+        </div>
+        <p class="project-desc" data-en="Hybrid network intrusion detection combining LSTM autoencoders, CNN, Isolation Forest, and LOF. Real-time multi-interface capture, Optuna-tuned." data-fr="Détection d'intrusion hybride combinant LSTM autoencoders, CNN, Isolation Forest et LOF. Capture multi-interface temps réel, tuning Optuna.">Hybrid network intrusion detection combining LSTM autoencoders, CNN, Isolation Forest, and LOF. Real-time multi-interface capture, Optuna-tuned.</p>
+        <div class="project-stack">
+          <span class="stack-tag">TensorFlow</span>&nbsp;·&nbsp;<span class="stack-tag">PyTorch</span>&nbsp;·&nbsp;<span class="stack-tag">pcap</span>&nbsp;·&nbsp;<span class="stack-tag">Suricata</span>
+        </div>
+      </div>
+
+      <!-- DocClassifier -->
+      <div class="project-card glass reveal">
+        <div class="project-header">
+          <div class="project-icon">📄</div>
+          <div class="project-links">
+            <a href="https://github.com/hounsoubenny-cyber/doc-classifier" target="_blank" class="project-link">↗</a>
+          </div>
+        </div>
+        <div class="project-name">DocClassifier AI</div>
+        <div class="project-badges">
+          <span class="badge badge-blue">Fullstack</span>
+          <span class="badge badge-gold">OCR + JWT</span>
+        </div>
+        <p class="project-desc" data-en="Full-stack document classifier — PDF, image, text input via OCR. FastAPI + React, JWT auth, Fernet encryption, rate limiting, async processing." data-fr="Classifieur de documents fullstack — PDF, image, texte via OCR. FastAPI + React, auth JWT, chiffrement Fernet, rate limiting, traitement async.">Full-stack document classifier — PDF, image, text input via OCR. FastAPI + React, JWT auth, Fernet encryption, rate limiting, async processing.</p>
+        <div class="project-stack">
+          <span class="stack-tag">FastAPI</span>&nbsp;·&nbsp;<span class="stack-tag">React</span>&nbsp;·&nbsp;<span class="stack-tag">Docker</span>&nbsp;·&nbsp;<span class="stack-tag">SQLModel</span>
+        </div>
+      </div>
+
+      <!-- SmartPredictor -->
+      <div class="project-card glass reveal" style="transition-delay:0.1s">
+        <div class="project-header">
+          <div class="project-icon">🤖</div>
+          <div class="project-links">
+            <a href="https://github.com/hounsoubenny-cyber/smart-predictor" target="_blank" class="project-link">↗</a>
+          </div>
+        </div>
+        <div class="project-name">SmartPredictor</div>
+        <div class="project-badges">
+          <span class="badge badge-gold">Auto-ML</span>
+          <span class="badge badge-blue">Library</span>
+        </div>
+        <p class="project-desc" data-en="Auto-ML library that auto-detects binary / multiclass / multilabel / regression from a single config. Stacking ensembles with Bayesian optimization." data-fr="Librairie Auto-ML qui détecte automatiquement binary / multiclass / multilabel / regression depuis un seul config. Ensembles stacking avec optimisation bayésienne.">Auto-ML library that auto-detects binary / multiclass / multilabel / regression from a single config. Stacking ensembles with Bayesian optimization.</p>
+        <div class="project-stack">
+          <span class="stack-tag">XGBoost</span>&nbsp;·&nbsp;<span class="stack-tag">CatBoost</span>&nbsp;·&nbsp;<span class="stack-tag">LightGBM</span>&nbsp;·&nbsp;<span class="stack-tag">Optuna</span>
+        </div>
+      </div>
+
+      <!-- NEXUS - featured -->
+      <div class="project-card featured glass reveal">
+        <div class="project-header">
+          <div class="project-icon">📡</div>
+          <div class="project-links">
+            <a href="https://github.com/hounsoubenny-cyber/nexus-four" target="_blank" class="project-link">↗</a>
+          </div>
+        </div>
+        <div class="project-name">NEXUS — Offline RAG Assistant</div>
+        <div class="project-badges">
+          <span class="badge badge-green">100% Offline</span>
+          <span class="badge badge-gold">Built in 24h</span>
+          <span class="badge badge-blue">Hackathon</span>
+          <span class="badge badge-gray">43K chunks</span>
+        </div>
+        <p class="project-desc" data-en="Fully offline RAG assistant built in 24h at a hackathon. Three search modes (semantic, keyword, hybrid), no internet required, ~500ms response time. FastAPI + React + FAISS + Docker." data-fr="Assistant RAG 100% offline construit en 24h lors d'un hackathon. Trois modes de recherche (sémantique, keyword, hybride), sans internet, ~500ms de réponse. FastAPI + React + FAISS + Docker.">Fully offline RAG assistant built in 24h at a hackathon. Three search modes (semantic, keyword, hybrid), no internet required, ~500ms response time. FastAPI + React + FAISS + Docker.</p>
+        <div class="project-stack">
+          <span class="stack-tag">FastAPI</span>&nbsp;·&nbsp;<span class="stack-tag">React</span>&nbsp;·&nbsp;<span class="stack-tag">FAISS</span>&nbsp;·&nbsp;<span class="stack-tag">Sentence-BERT</span>&nbsp;·&nbsp;<span class="stack-tag">Docker</span>
+        </div>
+      </div>
+
+      <!-- ContextGuard WIP -->
+      <div class="project-card glass reveal" style="transition-delay:0.1s">
+        <div class="project-header">
+          <div class="project-icon">🧬</div>
+          <div class="project-links"></div>
+        </div>
+        <div class="project-name">ContextGuard</div>
+        <div class="project-badges">
+          <span class="badge badge-wip">In Progress</span>
+          <span class="badge badge-gold">NLP Security</span>
+        </div>
+        <p class="project-desc" data-en="LLM prompt injection detection system. Multilingual BERT tokenizer + custom Transformer Encoder, 4-class output: safe / injection / jailbreak / exfiltration." data-fr="Système de détection d'injections de prompts LLM. Tokenizer BERT multilingue + Transformer Encoder custom, sortie 4 classes : safe / injection / jailbreak / exfiltration.">LLM prompt injection detection system. Multilingual BERT tokenizer + custom Transformer Encoder, 4-class output: safe / injection / jailbreak / exfiltration.</p>
+        <div class="project-stack">
+          <span class="stack-tag">PyTorch</span>&nbsp;·&nbsp;<span class="stack-tag">HuggingFace</span>&nbsp;·&nbsp;<span class="stack-tag">Transformer</span>
+        </div>
+      </div>
+
+      <!-- Hospital Guardian WIP -->
+      <div class="project-card glass reveal">
+        <div class="project-header">
+          <div class="project-icon">🏥</div>
+          <div class="project-links"></div>
+        </div>
+        <div class="project-name">Hospital Guardian</div>
+        <div class="project-badges">
+          <span class="badge badge-wip">In Progress</span>
+          <span class="badge badge-blue">Healthcare AI</span>
+        </div>
+        <p class="project-desc" data-en="AI-powered digital nervous system for hospitals. Patient Digital Twin, predictive AI, bio-inspired security, real-time monitoring. FastAPI + PyTorch + Kafka." data-fr="Système nerveux numérique IA pour hôpitaux. Digital Twin patient, IA prédictive, sécurité bio-inspirée, monitoring temps réel. FastAPI + PyTorch + Kafka.">AI-powered digital nervous system for hospitals. Patient Digital Twin, predictive AI, bio-inspired security, real-time monitoring. FastAPI + PyTorch + Kafka.</p>
+        <div class="project-stack">
+          <span class="stack-tag">FastAPI</span>&nbsp;·&nbsp;<span class="stack-tag">PyTorch</span>&nbsp;·&nbsp;<span class="stack-tag">Kafka</span>&nbsp;·&nbsp;<span class="stack-tag">TimescaleDB</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GITHUB -->
+<section id="github">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="section-label">GitHub</div>
+      <h2 class="section-title" data-en="Open <span>Source</span>" data-fr="Open <span>Source</span>">Open <span>Source</span></h2>
+    </div>
+    <div class="github-wrap glass reveal">
+      <div class="gh-info">
+        <div class="gh-handle">@hounsoubenny-cyber</div>
+        <p class="gh-desc" data-en="All my projects are open source. Real systems, production-grade code, no tutorials — just shipping." data-fr="Tous mes projets sont open source. De vrais systèmes, du code de qualité production — pas de tutoriels, juste de la livraison.">All my projects are open source. Real systems, production-grade code, no tutorials — just shipping.</p>
+        <div class="gh-stats">
+          <div class="gh-stat">
+            <div class="gh-stat-num">5+</div>
+            <div class="gh-stat-label" data-en="Public Repos" data-fr="Dépôts">Public Repos</div>
+          </div>
+          <div class="gh-stat">
+            <div class="gh-stat-num">34K+</div>
+            <div class="gh-stat-label">Lines</div>
+          </div>
+          <div class="gh-stat">
+            <div class="gh-stat-num">76+</div>
+            <div class="gh-stat-label" data-en="Python Files" data-fr="Fichiers Py">Python Files</div>
+          </div>
+        </div>
+        <a href="https://github.com/hounsoubenny-cyber" target="_blank" class="btn-primary" data-en="View GitHub Profile" data-fr="Voir le Profil GitHub">View GitHub Profile</a>
+      </div>
+      <div class="gh-img">
+        <img src="https://github-readme-stats.vercel.app/api?username=hounsoubenny-cyber&show_icons=true&theme=midnight-purple&hide_border=true&rank_icon=github&include_all_commits=true&count_private=true&bg_color=0f0f0f&title_color=C9A84C&icon_color=C9A84C&text_color=A09890" alt="GitHub Stats" loading="lazy"/>
+        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=hounsoubenny-cyber&layout=compact&theme=midnight-purple&hide_border=true&langs_count=6&bg_color=0f0f0f&title_color=C9A84C&text_color=A09890" alt="Top Languages" loading="lazy"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-wrap">
+    <div class="contact-wrap">
+      <div class="reveal">
+        <div class="section-label" data-en="Let's Talk" data-fr="Parlons">Let's Talk</div>
+        <h2 class="contact-title" data-en="Ready to build<br/>something <span style='background:linear-gradient(135deg,#E8C96A,#C9A84C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text'>great?</span>" data-fr="Prêt à construire<br/>quelque chose <span style='background:linear-gradient(135deg,#E8C96A,#C9A84C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text'>de grand ?</span>">Ready to build<br/>something <span style="background:linear-gradient(135deg,#E8C96A,#C9A84C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">great?</span></h2>
+        <p class="contact-sub" data-en="I'm available for freelance missions, collaborations, and open to internship opportunities. Let's build something that matters." data-fr="Disponible pour des missions freelance, des collaborations, et ouvert aux opportunités de stage. Construisons quelque chose qui compte.">I'm available for freelance missions, collaborations, and open to internship opportunities. Let's build something that matters.</p>
+        <div class="contact-links">
+          <a href="https://linkedin.com/in/benny-hounsou-00a267374" target="_blank" class="contact-link glass">
+            <div class="contact-link-icon">in</div>
+            <div class="contact-link-info">
+              <div class="contact-link-label">LinkedIn</div>
+              <div class="contact-link-value">Samuel Hounsou</div>
+            </div>
+          </a>
+          <a href="https://github.com/hounsoubenny-cyber" target="_blank" class="contact-link glass">
+            <div class="contact-link-icon" style="font-family:'DM Mono',monospace;font-size:14px;font-weight:600">GH</div>
+            <div class="contact-link-info">
+              <div class="contact-link-label">GitHub</div>
+              <div class="contact-link-value">hounsoubenny-cyber</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:0.2s">
+        <div class="contact-card glass">
+          <div class="contact-card-avatar">SH</div>
+          <div class="contact-card-name">Samuel Hounsou</div>
+          <div class="contact-card-role">AI & Cybersecurity Engineer</div>
+          <div class="contact-card-loc">📍 Cotonou, Bénin</div>
+          <div class="avail-badge">
+            <span class="avail-dot"></span>
+            <span data-en="Available for work" data-fr="Disponible">Available for work</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy" data-en="© 2025 Samuel Hounsou — Built from scratch." data-fr="© 2025 Samuel Hounsou — Construit from scratch.">© 2025 Samuel Hounsou — Built from scratch.</div>
+  <div class="footer-logo">SH</div>
+</footer>
+
+<script>
+// CURSOR
+const cursor=document.getElementById('cursor');
+const ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cursor.style.left=mx-4+'px';cursor.style.top=my-4+'px';
+});
+function animRing(){
+  rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;
+  ring.style.left=rx-16+'px';ring.style.top=ry-16+'px';
+  requestAnimationFrame(animRing);
+}animRing();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.transform='scale(2.5)';ring.style.transform='scale(1.5)';ring.style.opacity='0.3'});
+  el.addEventListener('mouseleave',()=>{cursor.style.transform='scale(1)';ring.style.transform='scale(1)';ring.style.opacity='0.5'});
+});
+
+// REVEAL
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// LANG
+let lang='en';
+const translations={};
+document.querySelectorAll('[data-en]').forEach(el=>{
+  translations[el]=el.getAttribute('data-en');
+});
+function setLang(l){
+  lang=l;
+  document.getElementById('btnEN').classList.toggle('active',l==='en');
+  document.getElementById('btnFR').classList.toggle('active',l==='fr');
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    const txt=el.getAttribute('data-'+l);
+    if(txt)el.innerHTML=txt;
+  });
+}
+</script>
+</body>
+</html>
