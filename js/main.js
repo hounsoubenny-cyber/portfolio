@@ -1,3 +1,30 @@
+// ─── THEME TOGGLE ───
+(function() {
+    const html = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    const toggleMobile = document.getElementById('themeToggleMobile');
+
+    function setTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        const icon = theme === 'dark' ? '☀️' : '🌙';
+        if (toggle) toggle.textContent = icon;
+        if (toggleMobile) toggleMobile.textContent = icon;
+    }
+
+    // Détecter le thème sauvegardé ou préférer le dark
+    const saved = localStorage.getItem('theme') || 'dark';
+    setTheme(saved);
+
+    function switchTheme() {
+        const current = html.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    }
+
+    if (toggle) toggle.addEventListener('click', switchTheme);
+    if (toggleMobile) toggleMobile.addEventListener('click', switchTheme);
+})();
+
 // ─── CANVAS PARTICLES ───
 const canvas=document.getElementById('bgCanvas');
 const ctx=canvas.getContext('2d');
@@ -28,7 +55,6 @@ class Particle{
 
 for(let i=0;i<120;i++)particles.push(new Particle());
 
-// connections
 function drawConnections(){
     for(let i=0;i<particles.length;i++){
         for(let j=i+1;j<particles.length;j++){
@@ -84,7 +110,6 @@ const observer=new IntersectionObserver(entries=>{
     entries.forEach(e=>{
         if(e.isIntersecting){
             e.target.classList.add('visible');
-            // animate lang bars
             e.target.querySelectorAll('.lang-fill').forEach(b=>b.classList.add('animate'));
             observer.unobserve(e.target);
         }

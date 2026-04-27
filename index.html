@@ -30,6 +30,7 @@
       <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
       <button class="lang-btn" id="btnFR" onclick="setLang('fr')">FR</button>
     </div>
+    <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">☀️</button>
     <a href="#contact" class="nav-cta" data-en="Hire Me" data-fr="Me Contacter">Hire Me</a>
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -43,6 +44,7 @@
   <a href="#services" class="nav-link" onclick="closeMenu()" data-en="Services" data-fr="Offres">Services</a>
   <a href="#projects" class="nav-link" onclick="closeMenu()" data-en="Projects" data-fr="Projets">Projects</a>
   <a href="#contact" class="nav-link" onclick="closeMenu()" data-en="Contact" data-fr="Contact">Contact</a>
+  <button id="themeToggleMobile" class="theme-btn mobile-only" aria-label="Toggle theme">☀️</button>
   <a href="#contact" class="btn-primary" onclick="closeMenu()" data-en="Hire Me" data-fr="Me Contacter">Hire Me</a>
 </div>
 
@@ -81,24 +83,22 @@
         </div>
         <div class="metric">
           <span class="metric-val">5+</span>
-          <span class="metric-label" data-en="Projects live" data-fr="Projets livrés">Projects live</span>
+          <span class="metric-label" data-en="Projects built" data-fr="Projets livrés">Projects built</span>
         </div>
       </div>
     </div>
     <div class="hero-avatar reveal" style="transition-delay:0.25s">
       <div class="avatar-glow"></div>
-        <div class="avatar-ring-outer"></div>
-        <div class="avatar-hex">
-          <!-- Face avant : hexagone + SH -->
-          <div class="avatar-face avatar-front">
-            <span class="avatar-fallback">SH</span>
-          </div>
-          <!-- Face arrière : cercle + photo -->
-          <div class="avatar-face avatar-back">
-            <img src="./images/photo.jpg" alt="Samuel Hounsou" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-            <span class="avatar-fallback-back" style="display:none">SH</span>
-          </div>
+      <div class="avatar-ring-outer"></div>
+      <div class="avatar-hex">
+        <div class="avatar-face avatar-front">
+          <span class="avatar-fallback">SH</span>
         </div>
+        <div class="avatar-face avatar-back">
+          <img src="./images/photo.jpg" alt="Samuel Hounsou" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <span class="avatar-fallback-back" style="display:none">SH</span>
+        </div>
+      </div>
       <div class="avatar-badge"><span class="avail-dot"></span><span data-en="Open to work" data-fr="Disponible">Open to work</span></div>
     </div>
   </div>
@@ -138,7 +138,7 @@
           <div class="skill-card-icon icon-violet">🧠</div>
           <span class="skill-card-cat cat-violet">AI / ML / DL</span>
         </div>
-        <p class="skill-card-desc" data-en="Built CNNs, RNNs, LSTMs, full GPT-style Transformers — all from scratch in PyTorch. Trained on real datasets, not toy examples. Phase 4/9 of my self-directed ML curriculum complete." data-fr="CNNs, RNNs, LSTMs, Transformers style GPT — tout construit from scratch en PyTorch. Entraîné sur de vraies données. Phase 4/9 de mon cursus ML auto-dirigé complétée.">Built CNNs, RNNs, LSTMs, full GPT-style Transformers — all from scratch in PyTorch. Trained on real datasets, not toy examples. Phase 4/9 of my self-directed ML curriculum complete.</p>
+        <p class="skill-card-desc" data-en="CNNs, RNNs, LSTMs, Transformers — built from scratch in PyTorch. Trained on real datasets, not toy examples. Production-ready pipelines with scikit-learn, TensorFlow, and HuggingFace." data-fr="CNNs, RNNs, LSTMs, Transformers — construits from scratch en PyTorch. Entraînés sur de vraies données, pas des exemples jouets. Pipelines prêts pour la production avec scikit-learn, TensorFlow, HuggingFace.">CNNs, RNNs, LSTMs, Transformers — built from scratch in PyTorch. Trained on real datasets, not toy examples. Production-ready pipelines with scikit-learn, TensorFlow, and HuggingFace.</p>
         <div class="skill-tags">
           <span class="stag stag-violet">PyTorch</span>
           <span class="stag stag-violet">TensorFlow</span>
@@ -151,7 +151,7 @@
           <span class="stag stag-violet">HuggingFace</span>
           <span class="stag stag-violet">ONNX</span>
           <span class="stag stag-violet">TorchScript</span>
-          <span class="stag stag-neutral">Optuna</span>
+          <span class="stag stag-violet">Optuna</span>
         </div>
       </div>
 
@@ -168,9 +168,9 @@
           <span class="stag stag-cyan">Anti-phishing</span>
           <span class="stag stag-cyan">Fuzzing</span>
           <span class="stag stag-cyan">Suricata</span>
-          <span class="stag stag-neutral">pcap</span>
-          <span class="stag stag-neutral">socket</span>
-          <span class="stag stag-neutral">dpkt</span>
+          <span class="stag stag-cyan">pcap</span>
+          <span class="stag stag-cyan">socket</span>
+          <span class="stag stag-cyan">dpkt</span>
         </div>
       </div>
 
@@ -184,11 +184,11 @@
         <div class="skill-tags">
           <span class="stag stag-cyan">FastAPI</span>
           <span class="stag stag-cyan">React</span>
-          <span class="stag stag-neutral">Docker</span>
-          <span class="stag stag-neutral">FAISS</span>
-          <span class="stag stag-neutral">SQLModel</span>
-          <span class="stag stag-neutral">REST API</span>
-          <span class="stag stag-neutral">WebSocket</span>
+          <span class="stag stag-cyan">Docker</span>
+          <span class="stag stag-cyan">FAISS</span>
+          <span class="stag stag-cyan">SQLModel</span>
+          <span class="stag stag-cyan">REST API</span>
+          <span class="stag stag-cyan">WebSocket</span>
         </div>
       </div>
 
@@ -210,35 +210,43 @@
         <div class="service-icon">🌐</div>
         <div class="service-cat" data-en="Web Development" data-fr="Développement Web">Web Development</div>
         <ul class="service-items">
-          <li data-en="Frontend only (React, responsive, animated)" data-fr="Frontend seul (React, responsive, animé)">Frontend only (React, responsive, animated)</li>
-          <li data-en="Backend only (FastAPI, async, typed)" data-fr="Backend seul (FastAPI, async, typé)">Backend only (FastAPI, async, typed)</li>
-          <li data-en="Fullstack complete (from DB to UI)" data-fr="Fullstack complet (de la BDD à l'UI)">Fullstack complete (from DB to UI)</li>
+          <li data-en="Landing page / showcase site (modern, animated, responsive)" data-fr="Site vitrine / landing page (moderne, animé, responsive)">Landing page / showcase site (modern, animated, responsive)</li>
+          <li data-en="Custom REST API (FastAPI, async, JWT auth, PostgreSQL)" data-fr="API REST sur mesure (FastAPI, async, auth JWT, PostgreSQL)">Custom REST API (FastAPI, async, JWT auth, PostgreSQL)</li>
+          <li data-en="Management dashboard (inventory, HR, school, finance...)" data-fr="Dashboard de gestion (stock, RH, école, finance...)">Management dashboard (inventory, HR, school, finance...)</li>
+          <li data-en="Fullstack system — from database to UI" data-fr="Système fullstack complet — de la BDD à l'UI">Fullstack system — from database to UI</li>
+          <li data-en="Real-time features: chat, notifications, WebSocket" data-fr="Fonctionnalités temps réel : chat, notifications, WebSocket">Real-time features: chat, notifications, WebSocket</li>
         </ul>
       </div>
       <div class="service-card reveal" style="transition-delay:0.1s">
         <div class="service-icon">🛡</div>
-        <div class="service-cat" data-en="Security" data-fr="Sécurité">Security</div>
+        <div class="service-cat" data-en="Cybersecurity" data-fr="Cybersécurité">Cybersecurity</div>
         <ul class="service-items">
-          <li data-en="Website hardening & protection" data-fr="Sécurisation & protection de site">Website hardening & protection</li>
-          <li data-en="Robust security systems (IDS, IPS, anti-phishing, vulnerability scanner...)" data-fr="Systèmes de sécurité robustes (IDS, IPS, anti-phishing, scanner...)">Robust security systems (IDS, IPS, anti-phishing, vulnerability scanner...)</li>
+          <li data-en="Security audit & website hardening" data-fr="Audit de sécurité & durcissement de site">Security audit & website hardening</li>
+          <li data-en="AI‑powered IDS/IPS — real‑time intrusion detection" data-fr="IDS/IPS alimenté par l'IA — détection d'intrusion temps réel">AI‑powered IDS/IPS — real‑time intrusion detection</li>
+          <li data-en="Anti‑phishing system for your platform" data-fr="Système anti‑phishing pour votre plateforme">Anti‑phishing system for your platform</li>
+          <li data-en="Custom vulnerability scanner (AI‑based)" data-fr="Scanner de vulnérabilités web (custom, basé IA)">Custom vulnerability scanner (AI‑based)</li>
         </ul>
       </div>
       <div class="service-card reveal" style="transition-delay:0.2s">
         <div class="service-icon">🤖</div>
         <div class="service-cat" data-en="Artificial Intelligence" data-fr="Intelligence Artificielle">Artificial Intelligence</div>
         <ul class="service-items">
-          <li data-en="AI integration into your application" data-fr="Intégration IA dans votre application">AI integration into your application</li>
-          <li data-en="Custom AI agent creation" data-fr="Création d'agent IA personnalisé">Custom AI agent creation</li>
-          <li data-en="Custom ML / DL model for your problem" data-fr="Modèle ML / DL sur mesure pour votre problème">Custom ML / DL model for your problem</li>
-          <li data-en="NLP / LLM fine-tuning" data-fr="Fine-tuning NLP / LLM">NLP / LLM fine-tuning</li>
+          <li data-en="AI chatbot integrated into your site or app" data-fr="Chatbot IA intégré dans votre site ou application">AI chatbot integrated into your site or app</li>
+          <li data-en="Custom ML/DL model — classification, prediction, detection" data-fr="Modèle ML/DL sur mesure — classification, prédiction, détection">Custom ML/DL model — classification, prediction, detection</li>
+          <li data-en="RAG system — private document assistant (offline)" data-fr="Système RAG — assistant documentaire privé (offline)">RAG system — private document assistant (offline)</li>
+          <li data-en="NLP / LLM fine‑tuning for your business case" data-fr="Fine‑tuning NLP / LLM pour votre cas d'usage">NLP / LLM fine‑tuning for your business case</li>
+          <li data-en="AI integration into your existing application" data-fr="Intégration IA dans votre application existante">AI integration into your existing application</li>
         </ul>
       </div>
       <div class="service-card reveal" style="transition-delay:0.3s">
         <div class="service-icon">⚙</div>
-        <div class="service-cat" data-en="Automation" data-fr="Automatisation">Automation</div>
+        <div class="service-cat" data-en="Automation & Data" data-fr="Automatisation & Données">Automation & Data</div>
         <ul class="service-items">
-          <li data-en="Data pipelines & ETL" data-fr="Pipelines de données & ETL">Data pipelines & ETL</li>
-          <li data-en="Python automation (scripts, workflows)" data-fr="Automatisation Python (scripts, workflows)">Python automation (scripts, workflows)</li>
+          <li data-en="Python scripts — automate repetitive tasks" data-fr="Scripts Python — automatiser vos tâches répétitives">Python scripts — automate repetitive tasks</li>
+          <li data-en="Web scraping & data extraction" data-fr="Web scraping & extraction de données">Web scraping & data extraction</li>
+          <li data-en="Data pipelines & ETL (collect, clean, transform)" data-fr="Pipelines de données & ETL (collecter, nettoyer, transformer)">Data pipelines & ETL (collect, clean, transform)</li>
+          <li data-en="Analytical dashboard — visualise your business data" data-fr="Dashboard analytique — visualiser vos données métier">Analytical dashboard — visualise your business data</li>
+          <li data-en="Automated Email / SMS workflows" data-fr="Workflows automatisés Email / SMS">Automated Email / SMS workflows</li>
         </ul>
       </div>
     </div>
@@ -268,11 +276,10 @@
         <div class="proj-name">NEXUS — Offline RAG Assistant</div>
         <div class="proj-badges">
           <span class="pbadge pb-green" data-en="100% Offline" data-fr="100% Offline">100% Offline</span>
-          <span class="pbadge pb-cyan" data-en="Built in 24h" data-fr="Construit en 24h">Built in 24h</span>
           <span class="pbadge pb-violet">Hackathon</span>
           <span class="pbadge pb-gray">43K chunks</span>
         </div>
-        <p class="proj-desc" data-en="Fully offline RAG assistant built solo in 24h at a hackathon. Three search modes — semantic, keyword, hybrid. No internet required, ~500ms response time. Complete fullstack: FastAPI + React + FAISS + Docker + Sentence-BERT." data-fr="Assistant RAG 100% offline construit seul en 24h lors d'un hackathon. Trois modes de recherche — sémantique, keyword, hybride. Sans internet, ~500ms de réponse. Fullstack complet : FastAPI + React + FAISS + Docker + Sentence-BERT.">Fully offline RAG assistant built solo in 24h at a hackathon. Three search modes — semantic, keyword, hybrid. No internet required, ~500ms response time. Complete fullstack: FastAPI + React + FAISS + Docker + Sentence-BERT.</p>
+        <p class="proj-desc" data-en="Fully offline RAG assistant with three search modes — semantic, keyword, hybrid. No internet required, ~500ms response time. Complete fullstack: FastAPI + React + FAISS + Docker + Sentence-BERT." data-fr="Assistant RAG 100% offline avec trois modes de recherche — sémantique, keyword, hybride. Sans internet, ~500ms de réponse. Fullstack complet : FastAPI + React + FAISS + Docker + Sentence-BERT.">Fully offline RAG assistant with three search modes — semantic, keyword, hybrid. No internet required, ~500ms response time. Complete fullstack: FastAPI + React + FAISS + Docker + Sentence-BERT.</p>
         <div class="proj-stack">
           <span class="proj-tech">FastAPI</span>
           <span class="proj-tech">React</span>
@@ -462,8 +469,22 @@
       <div class="reveal">
         <div class="section-eyebrow" data-en="Let's work together" data-fr="Travaillons ensemble">Let's work together</div>
         <h2 class="contact-heading" data-en="Ready to build<br/>something <span style='color:var(--cyan)'>real?</span>" data-fr="Prêt à construire<br/>quelque chose <span style='color:var(--cyan)'>de réel ?</span>">Ready to build<br/>something <span style="color:var(--cyan)">real?</span></h2>
-        <p class="contact-sub" data-en="Available for freelance missions, collaborations, and internship opportunities. I build fast and I build to last." data-fr="Disponible pour des missions freelance, des collaborations et des opportunités de stage. Je construis vite et je construis pour durer.">Available for freelance missions, collaborations, and internship opportunities. I build fast and I build to last.</p>
+        <p class="contact-sub" data-en="Available for freelance missions, collaborations. I build fast and I build to last." data-fr="Disponible pour des missions freelance, des collaborations. Je construis vite et je construis pour durer.">Available for freelance missions, collaborations. I build fast and I build to last.</p>
         <div class="contact-items">
+          <a href="mailto:hounsoubenny@gmail.com" class="contact-item">
+            <div class="contact-item-icon">✉</div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-val">hounsoubenny@gmail.com</div>
+            </div>
+          </a>
+          <a href="mailto:hounsoutchegnon@gmail.com" class="contact-item">
+            <div class="contact-item-icon">✉</div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-val">hounsoutchegnon@gmail.com</div>
+            </div>
+          </a>
           <a href="https://linkedin.com/in/benny-hounsou-00a267374" target="_blank" class="contact-item">
             <div class="contact-item-icon">in</div>
             <div>
